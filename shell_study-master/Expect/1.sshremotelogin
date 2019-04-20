@@ -1,0 +1,15 @@
+#!/usr/bin/env expect
+#
+# Author: bavduer
+# Email: bavduer@163.com
+# Date: 2019/03/26
+# Usage: sshd remote login.
+
+set username "root"
+set hostip "10.3.145.162"
+set passwd "1"
+
+spawn ssh $username@$hostip
+expect "*yes/no*" { send "yes\r" }
+expect "*password:" { send "$passwd\r" }
+expect eof

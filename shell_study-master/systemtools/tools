@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+#
+# Author: bavduer
+# Email: bavduer@163.com
+# Date: 2019/03/22
+# Usage: study case.
+
+cat <<-EOF
+#------------------------------------------------------#
+#		System Manager Tools V1.0	       #
+#	1. 安装Nginx web 服务			       #
+#	2. 安装MySQL data服务			       #
+#	3. 退出					       #	
+#------------------------------------------------------#
+EOF
+
+printf "\e[1;31m 请输入你想选择的模式: \e[0m" && read var
+case $var in
+  '1')
+	if [ -f /etc/nginx/nginx.conf ];then
+		printf "你已经安装了Nginx.\n"
+        else
+		if [ -f /etc/yum.repos.d/nginx.repo ];then
+			yum -y install nginx
+		else
+			printf "[nginx]\n
+			name=nginx repo\n
+			baseurl=http://nginx.org/packages/centos/7/\$basearch\n
+			gpgcheck=0" >/etc/yum.repos.d/nginx.repo
+			
+			yum -y install nginx
+		fi
+	fi
+	;;
+  '2')
+	if [ -f /etc/yum.repos.d/mysql-community.repo ];then
+		yum -y install mysql-community-server
+	else
+		cp -rf ./mysql-community.repo /etc/yum.repos.d/mysql-community.repo
+		yum -y install mysql-community-server
+	fi
+	;;
+  '3')
+	#kill -9 $$ >>/dev/null
+	exit
+	;;
+  *)
+	printf "请输入“1”，“2”，“3”这些模式的字符\n"
+	;;
+esac

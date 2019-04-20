@@ -1,0 +1,12 @@
+OFFLINE:(2)
+ONLINE:(3)
+
+PARTONE: OFFLINE:
+	shihao		30B
+	zhoulintao	15B
+	xiaoliling	20B
+	zhuchangrun	20B
+
+PARTTWO: ONLINE:
+	zhoulintao	30B
+	
